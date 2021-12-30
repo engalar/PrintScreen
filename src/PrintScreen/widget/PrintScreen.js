@@ -65,16 +65,17 @@ define([
             //dojoClass.toggle("fixedWidth");
             var pid = mx.ui.showProgress(null, true);
 
-			var backgroundClr = '#fff';
+			var backgroundClr = '#ffffff';
 			if(this.imgType === "png") {
-				backgroundClr = "transparent";
+				backgroundClr = null;
 			}
 
 			var imgType = this.imgType;
 
+            // https://html2canvas.hertzen.com/configuration/
             html2canvas(widgetNode, {
-				background: backgroundClr,
-				onrendered: function(canvas) {
+				backgroundColor: backgroundClr
+				}).then(function(canvas) {
                     var strFileName2Save = self.Filename2Save(self.targetClass),
                         doc;
 
@@ -141,9 +142,8 @@ define([
                     }
 
                     mx.ui.hideProgress(pid);
-                },
-                height: widgetNode.scrollHeight
-            });
+                }
+            );
         },
 
         msieversion: function() {
